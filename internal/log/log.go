@@ -8,10 +8,10 @@ import (
 
 const (
   RESET = "\033[0m"
-  DEBUG = "\033[0;34m"
-  INFO  = "\033[0;32m"
-  WARN  = "\033[0;33m"
-  ERROR = "\033[0;31m"
+  DEBUG = "\033[1;34m"
+  INFO  = "\033[1;32m"
+  WARN  = "\033[1;33m"
+  ERROR = "\033[1;31m"
 )
 
 func Debug(format string, args ...any) {
@@ -28,6 +28,11 @@ func Warn(format string, args ...any) {
 
 func Error(format string, args ...any) {
   fmt.Fprintf(os.Stderr, coloured(ERROR, format), args...)
+}
+
+func Abort(format string, args ...any) {
+  fmt.Fprintf(os.Stderr, coloured(ERROR, format), args...)
+  os.Exit(1)
 }
 
 func coloured(colour, format string) string {

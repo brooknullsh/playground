@@ -1,16 +1,17 @@
 package main
 
 import (
+  "fmt"
   "os"
   "playground/internal/log"
-  "playground/pkg/foo"
+  "playground/pkg/context"
 )
 
 var modules map[string]func()
 
 func init() {
   modules = make(map[string]func())
-  modules["foo"] = foo.Run
+  modules["context"] = context.Run
 
   log.Debug("%d module(s) initialised", len(modules))
 }
@@ -18,17 +19,15 @@ func init() {
 func main() {
   args := os.Args[1:]
   if len(args) != 1 {
-    log.Error("too many/few arguments")
-    os.Exit(1)
+    log.Abort("too many/few arguments")
   }
 
   module := args[0]
   fn, found := modules[module]
   if !found {
-    log.Error("unknown module: %s", module)
-    os.Exit(1)
+    log.Abort("unknown module: %s", module)
   }
 
-  log.Info("-> %s", module)
+  fmt.Println()
   fn()
 }
