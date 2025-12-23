@@ -4,6 +4,7 @@ import (
   "fmt"
   "os"
   "playground/internal/log"
+  "playground/pkg/atomic"
   "playground/pkg/channel"
   "playground/pkg/context"
 )
@@ -12,8 +13,9 @@ var modules map[string]func()
 
 func init() {
   modules = make(map[string]func())
-  modules["context"] = context.Run
+  modules["atomic"] = atomic.Run
   modules["channel"] = channel.Run
+  modules["context"] = context.Run
 
   log.Debug("%d module(s) initialised", len(modules))
 }

@@ -23,7 +23,7 @@ func Run() {
 
   for i := 0; i < workers; i++ {
     wg.Add(1)
-    go fanOut(i, &wg)
+    go fanOut(&wg, i)
   }
 
   go producer()
@@ -31,7 +31,7 @@ func Run() {
   fanIn(&wg)
 }
 
-func fanOut(idx int, wg *sync.WaitGroup) {
+func fanOut(wg *sync.WaitGroup, idx int) {
   defer wg.Done()
 
   // NOTE: If tasks < worker, non-chosen workers (runtime pseudo-randomly
