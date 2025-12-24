@@ -1,15 +1,18 @@
-package channel
+package golang
 
 import (
   "playground/internal/log"
   "sync"
 )
 
+const (
+  workers = 10
+  tasks   = 5
+)
+
 var (
   jobs    = make(chan int)
   results = make(chan int)
-  workers = 10
-  tasks   = 5
 )
 
 // 1. Simultaneously spawn workers (W), a producer (P) & a consumer (C)
@@ -18,7 +21,7 @@ var (
 // 4. W adds processed jobs to results ->|
 // 5.              C waits for results <-|
 
-func Run() {
+func Channel() {
   var wg sync.WaitGroup
 
   for i := 0; i < workers; i++ {

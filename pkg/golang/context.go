@@ -1,4 +1,4 @@
-package context
+package golang
 
 import (
   "context"
@@ -12,7 +12,7 @@ const (
   work = 1 * time.Second
 )
 
-func Run() {
+func Context() {
   ctx, cancel := context.WithTimeout(context.Background(), max)
   log.Debug("max: %v", max)
 

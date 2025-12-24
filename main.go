@@ -4,18 +4,16 @@ import (
   "fmt"
   "os"
   "playground/internal/log"
-  "playground/pkg/atomic"
-  "playground/pkg/channel"
-  "playground/pkg/context"
+  "playground/pkg/golang"
 )
 
 var modules map[string]func()
 
 func init() {
   modules = make(map[string]func())
-  modules["atomic"] = atomic.Run
-  modules["channel"] = channel.Run
-  modules["context"] = context.Run
+  modules["atomic"] = golang.Atomic
+  modules["channel"] = golang.Channel
+  modules["context"] = golang.Context
 
   log.Debug("%d module(s) initialised", len(modules))
 }

@@ -1,4 +1,4 @@
-package atomic
+package golang
 
 import (
   "playground/internal/log"
@@ -13,7 +13,7 @@ const (
   iters = 1000
 )
 
-func Run() {
+func Atomic() {
   var (
     mu      sync.Mutex
     muCount int
