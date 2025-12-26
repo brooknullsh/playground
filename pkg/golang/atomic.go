@@ -15,9 +15,9 @@ const (
 
 func Atomic() {
   var (
-    mu      sync.Mutex
-    muCount int
-    wg      sync.WaitGroup
+    mu    sync.Mutex
+    mucnt int
+    wg    sync.WaitGroup
   )
 
   // NOTE: A mutex is better here as the cache line is only invalidated on lock
@@ -25,21 +25,21 @@ func Atomic() {
   // stop contending.
   for i := 0; i < steps; i++ {
     wg.Add(1)
-    go mutexInc(&wg, &mu, &muCount)
+    go mutexInc(&wg, &mu, &mucnt)
   }
 
-  var atCount atomic.Int32
+  var atcnt atomic.Int32
 
   // NOTE: All cores repeatedly try and access the cache line while it's being
   // invalidated, leading to coherence misses.
   for i := 0; i < steps; i++ {
     wg.Add(1)
-    go atomicInc(&wg, &atCount)
+    go atomicInc(&wg, &atcnt)
   }
 
   wg.Wait()
-  log.Info("mutex: %d", muCount)
-  log.Info("atomic: %d", atCount.Load())
+  log.Info("mutex: %d", mucnt)
+  log.Info("atomic: %d", atcnt.Load())
 }
 
 func mutexInc(wg *sync.WaitGroup, mu *sync.Mutex, count *int) {

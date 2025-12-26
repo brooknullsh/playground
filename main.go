@@ -5,6 +5,7 @@ import (
   "os"
   "playground/internal/log"
   "playground/pkg/golang"
+  "playground/pkg/structure"
 )
 
 var modules map[string]func()
@@ -14,8 +15,9 @@ func init() {
   modules["atomic"] = golang.Atomic
   modules["channel"] = golang.Channel
   modules["context"] = golang.Context
+  modules["linkedlist"] = structure.LinkedList
 
-  log.Debug("%d module(s) initialised", len(modules))
+  log.Debug("%d module(s) ready", len(modules))
 }
 
 func main() {
