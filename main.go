@@ -17,6 +17,7 @@ func init() {
   modules["context"] = golang.Context
   modules["ll"] = structure.LinkedList
   modules["bst"] = structure.BinarySearchTree
+  modules["lru"] = structure.LeastRecentlyUsed
 
   log.Debug("%d module(s) ready", len(modules))
 }
