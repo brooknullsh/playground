@@ -15,7 +15,8 @@ func init() {
   modules["atomic"] = golang.Atomic
   modules["channel"] = golang.Channel
   modules["context"] = golang.Context
-  modules["linkedlist"] = structure.LinkedList
+  modules["ll"] = structure.LinkedList
+  modules["bst"] = structure.BinarySearchTree
 
   log.Debug("%d module(s) ready", len(modules))
 }
